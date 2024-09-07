@@ -2,11 +2,11 @@ name: Build firmware
 
 on:
   workflow_dispatch:
-  inputs:
-    configfile:
-      description: 'Use config'
-      required: true
-      default: 'build.config'
+    inputs:
+      configfile:
+        description: 'Use config'
+        required: true
+        default: 'build.config'
   push:
     tags:
       - '*'
