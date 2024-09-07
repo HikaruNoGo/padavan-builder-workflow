@@ -2,6 +2,11 @@ name: Build firmware
 
 on:
   workflow_dispatch:
+  inputs:
+    configfile:
+      description: 'Use config'
+      required: true
+      default: 'build.config'
   push:
     tags:
       - '*'
@@ -16,8 +21,8 @@ jobs:
 
     - name: Get variables
       run: |
-        sed -i 's|\r$||g' variables build.config
-        . <(cat variables build.config)
+        sed -i 's|\r$||g' variables ${{ github.event.inputs.configfile }}
+        . <(cat variables ${{ github.event.inputs.configfile }})
         PADAVAN_THEMES="${PADAVAN_THEMES[*]}"
         for v in "${!PADAVAN_@}" "${!CONFIG_@}"; do
           echo "$v=${!v}" >> $GITHUB_ENV
